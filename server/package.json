@@ -1,0 +1,27 @@
+{
+  "name": "limehome",
+  "version": "1.0.0",
+  "main": "server/dist/app.js",
+  "author": "John Kennedy (codejockie)",
+  "scripts": {
+    "build": "tsc --outDir dist src/app.ts",
+    "start": "yarn build && node dist/app.js",
+    "test": ""
+  },
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.5.11"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.1",
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "supertest": "^4.0.2",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
+  }
+}
