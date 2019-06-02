@@ -1,3 +1,18 @@
-<p>
-  home works!
-</p>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{ title }}
+  </div>
+  <div class="panel-body">
+    <form class="booking-form">
+      <mat-form-field class="booking-full-width">
+        <input type="text" placeholder="Search for a property" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let property of filteredProperties | async" [value]="property">
+            {{property.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button (click)="createBooking()" mat-button>Book</button>
+    </form>
+  </div>
+</div>
