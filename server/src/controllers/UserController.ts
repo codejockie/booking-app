@@ -1,10 +1,12 @@
-import { Request, Response } from "express";
-import { bookings } from "../data/bookings";
+import { Response } from "express";
+
+import { Booking } from "../models/Booking";
+import { IRequest } from "./IRequest";
 
 export class UserController {
-  public static getUserBookings(request: Request, response: Response) {
+  public static async getUserBookings(request: IRequest, response: Response) {
     const { userId } = request.params;
-    const allBookings = bookings.filter((booking) => booking.user.id === userId);
+    const allBookings = await Booking.find({ user: userId });
     response.send(allBookings);
   }
 }
