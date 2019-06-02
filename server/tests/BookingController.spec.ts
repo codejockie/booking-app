@@ -19,6 +19,7 @@ describe("Booking Controller", () => {
           city: "Berlin",
           propertyId: "b007",
           propertyName: "Red House",
+          user: "5cf2310c0b10799ca5a046aa",
         },
       );
     }
