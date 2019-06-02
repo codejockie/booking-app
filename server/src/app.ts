@@ -6,6 +6,7 @@ import { sign } from "jsonwebtoken";
 import mongoose = require("mongoose");
 import winston = require("winston");
 
+import { mongoURL } from "./config";
 import { User } from "./models/User";
 import { routes } from "./routes";
 import { seedUsers } from "./seed";
@@ -15,7 +16,7 @@ mongoose.Promise = global.Promise;
 const app = express();
 const router = express.Router();
 const PORT = process.env.PORT || 3000;
-const { JWT_SECRET = "todo-app-super-shared-secret" } = process.env;
+const { JWT_SECRET = "todo-app-super-shared-secret", NODE_ENV } = process.env;
 const logger = winston.createLogger({
   defaultMeta: { service: "user-service" },
   format: winston.format.json(),
@@ -47,7 +48,7 @@ app.post("/auth/login", async (req, res) => {
   res.send({ token });
 });
 
-mongoose.connect("mongodb://localhost:27017/lime", { useCreateIndex: true, useNewUrlParser: true }, () => {
+mongoose.connect(mongoURL(NODE_ENV), { useCreateIndex: true, useNewUrlParser: true }, () => {
   // Seed users on Connect
   seedUsers();
 });
