@@ -1,6 +1,7 @@
 import { json, urlencoded } from "body-parser";
 import cors = require("cors");
 import express = require("express");
+import expressJwt = require("express-jwt");
 import { sign } from "jsonwebtoken";
 import mongoose = require("mongoose");
 import winston = require("winston");
@@ -29,13 +30,7 @@ const logger = winston.createLogger({
 app.use(urlencoded({ extended: true }));
 app.use(json());
 app.use(cors());
-
-// Enable CORS
-app.use((request, response, next) => {
-  response.header("Access-Control-Allow-Origin", "*");
-  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(expressJwt({ secret: JWT_SECRET }).unless({ path: ["/auth/login"] }));
 
 // Configure routes
 routes(router);
